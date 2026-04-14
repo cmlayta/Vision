@@ -33,7 +33,7 @@ def capturar_imagen():
     cmd = (
         f"rpicam-still -o {filename} "
         f"--width 1280 --height 720 "
-        f"--nopreview"
+        f"--preview"
     )
 
     os.system(cmd)
