@@ -31,7 +31,7 @@ def capturar_imagen():
     cmd = (
         f"rpicam-still -o {filename} "
         f"--width 1280 --height 720 "
-        f"--shutter 500 "
+        f"--shutter 300 "
         f"--gain 2 "
         f"--nopreview"
     )
