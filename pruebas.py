@@ -7,7 +7,7 @@ from datetime import datetime
 # CONFIGURACIÓN
 # ==============================
 SENSOR_PIN = 17
-OUTPUT_DIR = "/home/pi/capturas"
+OUTPUT_DIR = os.path.expanduser("~/capturas")
 COOLDOWN = 0.3   # segundos (evita múltiples disparos)
 
 last_trigger_time = 0
