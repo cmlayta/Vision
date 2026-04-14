@@ -66,7 +66,7 @@ def sensor_callback(channel):
 # ==============================
 GPIO.add_event_detect(
     SENSOR_PIN,
-    GPIO.RISING,   # ⚠ cambiar a FALLING si no detecta bien
+    GPIO.FALLING,   # ⚠ cambiar a FALLING si no detecta bien
     callback=sensor_callback,
     bouncetime=50
 )
