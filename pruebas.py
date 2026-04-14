@@ -8,7 +8,9 @@ from datetime import datetime
 # ==============================
 SENSOR_PIN = 17
 OUTPUT_DIR = os.path.expanduser("~/capturas")
-COOLDOWN = 0.3   # segundos (evita múltiples disparos)
+
+COOLDOWN = 0.3     # evita múltiples disparos
+DELAY_CAPTURA = 0.15  # 🔥 AJUSTA ESTE VALOR (segundos)
 
 last_trigger_time = 0
 
@@ -29,14 +31,14 @@ def capturar_imagen():
     filename = f"{OUTPUT_DIR}/img_{timestamp}.jpg"
 
     cmd = (
-    f"rpicam-still -o {filename} "
-    f"--width 1280 --height 720 "
-    f"--nopreview"
+        f"rpicam-still -o {filename} "
+        f"--width 1280 --height 720 "
+        f"--nopreview"
     )
 
     os.system(cmd)
 
-    print(f"[OK] Imagen capturada: {filename}")
+    print(f"[OK] Imagen guardada: {filename}")
 
 # ==============================
 # CALLBACK DEL SENSOR
@@ -46,13 +48,16 @@ def sensor_callback(channel):
 
     current_time = time.time()
 
-    # Anti-rebote / anti-múltiples capturas
+    # Anti-rebote
     if current_time - last_trigger_time < COOLDOWN:
         return
 
     last_trigger_time = current_time
 
     print("[TRIGGER] Envase detectado")
+
+    # 🔥 Delay para sincronizar posición del envase
+    time.sleep(DELAY_CAPTURA)
 
     capturar_imagen()
 
@@ -61,7 +66,7 @@ def sensor_callback(channel):
 # ==============================
 GPIO.add_event_detect(
     SENSOR_PIN,
-    GPIO.RISING,
+    GPIO.RISING,   # ⚠ cambiar a FALLING si no detecta bien
     callback=sensor_callback,
     bouncetime=50
 )
