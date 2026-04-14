@@ -10,7 +10,7 @@ SENSOR_PIN = 17
 OUTPUT_DIR = os.path.expanduser("~/capturas")
 
 COOLDOWN = 0.3     # evita múltiples disparos
-DELAY_CAPTURA = 0.15  # 🔥 AJUSTA ESTE VALOR (segundos)
+DELAY_CAPTURA = 0.5 # 🔥 AJUSTA ESTE VALOR (segundos)
 
 last_trigger_time = 0
 
@@ -66,7 +66,7 @@ def sensor_callback(channel):
 # ==============================
 GPIO.add_event_detect(
     SENSOR_PIN,
-    GPIO.FALLING,   # ⚠ cambiar a FALLING si no detecta bien
+    GPIO.RISING,   # ⚠ cambiar a FALLING si no detecta bien
     callback=sensor_callback,
     bouncetime=50
 )
