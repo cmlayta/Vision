@@ -29,11 +29,9 @@ def capturar_imagen():
     filename = f"{OUTPUT_DIR}/img_{timestamp}.jpg"
 
     cmd = (
-        f"rpicam-still -o {filename} "
-        f"--width 1280 --height 720 "
-        f"--shutter 300 "
-        f"--gain 2 "
-        f"--nopreview"
+    f"rpicam-still -o {filename} "
+    f"--width 1280 --height 720 "
+    f"--nopreview"
     )
 
     os.system(cmd)
